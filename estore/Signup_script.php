@@ -1,10 +1,7 @@
 <?php
 include 'includes/Common.php';
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "store";
-
+ include 'includes/dbconfig.php';
+ 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -14,7 +11,7 @@ if ($conn->connect_error) {
 $email=$_POST['email'];
 $pass=$_POST['password'];
 
-$sql = "SELECT id, email FROM users where email= '$email' and password = '$pass' ";
+$sql = "SELECT id,name, email FROM users where email= '$email' and password = '$pass' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows != 0) {
@@ -40,10 +37,9 @@ VALUES ('$name', '$email', '$pass','$contact','$city','$address')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";
-
  $_SESSION['user_id']= $conn -> insert_id;
  $_SESSION['email']=$email;
- header("Location:products.php");
+ header("Location:home.php");
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
