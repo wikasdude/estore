@@ -12,19 +12,30 @@ if (!isset($_SESSION['email'])) {
 	<title>product page</title>
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--   data table link -->
- 
-   <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-   <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
-   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--   data table link -->
+<!--  data table start link -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+<!-- data table link end -->
+   
+    
+   
+  
+  <!-- export file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://gitcdn.xyz/repo/FuriosoJack/TableHTMLExport/v1.0.0/src/tableHTMLExport.js"></script>
-  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- 
 <link  href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
  -->
@@ -35,7 +46,7 @@ if (!isset($_SESSION['email'])) {
  -->
  
 <style type="text/css">
-  .table
+  #mytable
   {
     margin-top: 0px;
   }
@@ -93,7 +104,7 @@ if ($result->num_rows > 0) {
     
   //$sum =" "+$row['price'];
     
-    echo "<tr><td>id: " . $row["id"]."</td>  - <td>Name: " . $row["name"]. "</td> <td>price : " . $row["price"]. "</td><td><a href='cart-remove.php?id={$row['MY_PROJECTS_ID']}'   class='btn btn-primary'> Remove</a>";
+    echo "<tr><td>id: " . $row["id"]."</td>   <td>Name: " . $row["name"]. "</td> <td>price : " . $row["price"]. "</td><td><a href='cart-remove.php?id={$row['MY_PROJECTS_ID']}'   class='btn btn-primary'> Remove</a>";
      
       if (check_if_ordered($row['MY_PROJECTS_ID'])) { //This is same as if(check_if_added_to_cart !=
     //0)
@@ -136,9 +147,10 @@ $conn->close();
 <!-- row  3 start -->
 
 </div> 
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#mytable').dataTable( {"sPaginationType": "full_numbers" });
+    $('#mytable').DataTable();
    $(".export-btn").click(function(){  
      $("#mytable").tableHTMLExport({
       type:'csv',
