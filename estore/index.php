@@ -37,119 +37,62 @@ else{
 
 <?php
  include 'includes/header.php';
+ include 'includes/dbconfig.php';
+ $conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}  
+
+$sql = "SELECT id,name,price, image,description ,category_id FROM items; ";
+$result = $conn->query($sql);
+
+if ($result->num_rows != 0) {
+  // output data of each row
+  
 
 ?>
  <div class="container-fluid" style=" margin-bottom: 150px;">
    <!-- The Modal -->
          
           <!-- modal end -->
-  <div class="row" style="margin-top: 110px;">
+              <div class="row" style="margin-top: 110px;">
+                  <?php
+                         while($row = $result->fetch_assoc()) {
+                  
+               
 
-       <!--  <div class="card-deck" style="margin-top: 60px;">
-        -->       <!--  firstcol start -->
-          <div class="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-          <div class="card">
-             <div class="card-header">
-    #mobile 1
-  </div>
-            <img class="card-img-top" src="image/mob1.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text"> 4.2 snapdragon processor.</p>
-               <a class=" btn btn-primary btn-block"  href="#myModal"   data-toggle="modal">buy now</a>
+                      echo "<div class='col-md-4 col-sm-6 col-lg-4 col-xl-4'>
+                      <div class='card'><div class='card-header'>
+                            'name : ".$row['name']." 
+                        </div>
+                        <img class='card-img-top' src='{$row['image']}' alt='Card image cap' style='height:250px;'>
+                        <div class='card-body'>
+                          <h5 class='card-title'>".$row['name']."</h5>
+                          <p class='card-text'> ".$row['description']." <br> price :".$row['price']."</p>";
+                          
+                      
+             
+                  echo"
+  <a class='btn btn-primary btn-block'  href='#myModal'   data-toggle='modal'>buy now</a></div></div></div>";
+             
+              }
+            }
+            else
+            {
+              echo "0 result<br>";
+            }
+              
+            $conn->close();
+             
+
+
+
+            ?>
+
+             <!-- row end -->
             </div>
-            
-          </div>
-        </div><!-- first col end --> 
-      
-<!-- 2nd col start -->
-<div class="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-  <div class="card">
-     <div class="card-header">
-    #mobile 2
-  </div>
-    <img class="card-img-top" src="image/mob2.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-       <a class=" btn btn-primary btn-block" href="#myModal"   data-toggle="modal">buy now</a>
-    </div>
-    
-  </div>
-</div> <!-- col 2 end -->
-<!-- row end -->
-<div class="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-  <div class="card">
-     <div class="card-header">
-    #mobile 3
-  </div>
-    <img class="card-img-top" src="image/mob3.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <a class=" btn btn-primary btn-block" href="#myModal"   data-toggle="modal">buy now</a>
-    </div>
-     
-  </div>
-
-</div>
-<!-- </div> --> <!-- card deck end -->
-
-<!-- 2nd row -->
-
-<!-- <div class="card-deck" style="margin-top: 60px;">
- -->  <div class="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-  <div class="card">
-    <div class="card-header">
-    #1 mobile 4
-  </div>
-    <img class="card-img-top" src="image/mob4.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">hello. This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer contentThis is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content</p>
-       <a class=" btn btn-primary btn-block"  href="#myModal"   data-toggle="modal">buy now</a>
-    </div>
-    
-  </div>
-</div> 
-<!-- col end -->
-<div class="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-  <div class="card">
-    <div class="card-header">
-    # mobile 5
-  </div>
-    <img class="card-img-top" src="image/mob5.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-       <a class=" btn btn-primary btn-block"  href="#myModal"   data-toggle="modal">buy now</a>
-    </div>
-    
-  </div>
-</div>
-<!-- col end -->
-<div class="col-md-4  col-sm-6 col-lg-4 col-xl-4">
-  <div class="card">
-    <div class="card-header">
-    #mobile 6
-  </div>
-    <img class="card-img-top" src="image/mob6.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-       <a class="btn btn-primary btn-block"  href="#myModal"   data-toggle="modal">buy now</a>
-    </div>
-    
-  </div>
-</div>
-<!-- col end -->
-<!-- row end -->
- <!-- </div> -->
-
-<!-- second card deck end -->
-
-</div>
-   
+               
 
   </div>
  <?php
@@ -159,3 +102,6 @@ include 'includes/footer.php';
   
 </body>
 </html>
+
+
+  
